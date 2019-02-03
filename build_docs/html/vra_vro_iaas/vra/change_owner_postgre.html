@@ -1,0 +1,226 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Change owner directly in the vRa postGre &mdash; knowledge 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> knowledge
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vra_vro_iaas.html">vRa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vra_vro_iaas.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">knowledge</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Change owner directly in the vRa postGre</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/vra_vro_iaas/vra/change_owner_postgre.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="change-owner-directly-in-the-vra-postgre">
+<span id="change-owner-postgre"></span><h1>Change owner directly in the vRa postGre<a class="headerlink" href="#change-owner-directly-in-the-vra-postgre" title="Permalink to this headline">¶</a></h1>
+<p>Get the vm id from the cat_resource table</p>
+<div class="highlight-psql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">cat_resource</span> <span class="k">where</span> <span class="k">name</span><span class="o">=</span><span class="s1">&#39;my_vm_name&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Get the owner of this vm</p>
+<div class="highlight-psql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">cat_resource_owners</span> <span class="k">where</span> <span class="n">resource_id</span><span class="o">=</span><span class="s1">&#39;my_resource_id&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Eventually, check the name of the owner using his id</p>
+<div class="highlight-psql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">cat_principal</span> <span class="k">where</span> <span class="n">id</span><span class="o">=</span><span class="s1">&#39;current_owner_id&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Find the id of the owner you want to set</p>
+<div class="highlight-psql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">cat_principal</span> <span class="k">where</span> <span class="k">name</span> <span class="k">like</span> <span class="s1">&#39;%John Doe%&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Update the resource owner (use transaction!)</p>
+<div class="highlight-psql notranslate"><div class="highlight"><pre><span></span><span class="k">update</span> <span class="n">cat_resource_owners</span> <span class="k">set</span> <span class="n">owner_id</span><span class="o">=</span><span class="s1">&#39;new_owner_id&#39;</span> <span class="k">where</span> <span class="n">resource_id</span><span class="o">=</span><span class="s1">&#39;my_resource_id&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Check your modification</p>
+<div class="highlight-psql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">cat_resource_owners</span> <span class="k">where</span> <span class="n">resource_id</span><span class="o">=</span><span class="s1">&#39;my_resource_id&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>To avoid inconsistency, you also should have to modifiy it in the iaas db, see <a class="reference internal" href="../iaas/change_owner_iaas.html#change-owner-iaas"><span class="std std-ref">Change owner directly in the vRa Iaas</span></a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Richard DEVERS
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

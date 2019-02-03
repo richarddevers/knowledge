@@ -1,0 +1,45 @@
+.. _change_owner_postgre:
+
+Change owner directly in the vRa postGre
+=========================================
+
+Get the vm id from the cat_resource table
+
+.. code-block::  psql
+
+   select * from cat_resource where name='my_vm_name';
+
+Get the owner of this vm
+
+.. code-block:: psql
+
+    select * from cat_resource_owners where resource_id='my_resource_id';
+
+Eventually, check the name of the owner using his id
+
+.. code-block:: psql
+
+    select * from cat_principal where id='current_owner_id';
+
+Find the id of the owner you want to set
+
+.. code-block:: psql
+
+    select * from cat_principal where name like '%John Doe%';
+
+Update the resource owner (use transaction!)
+
+.. code-block:: psql
+
+    update cat_resource_owners set owner_id='new_owner_id' where resource_id='my_resource_id';
+
+Check your modification
+
+.. code-block:: psql
+
+    select * from cat_resource_owners where resource_id='my_resource_id';
+
+You also should have to modifiy it in the iaas db, see change_owner_iaas_.
+
+
+

@@ -1,11 +1,13 @@
-knowledge
+vRa - vRo - Iaas
 =====================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   vra_vro_iaas/vra_vro_iaas
+   vra/vra 
+   vro/vro
+   iaas/iaas
 
 Indices and tables
 ==================

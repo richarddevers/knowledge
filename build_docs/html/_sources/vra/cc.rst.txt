@@ -1,0 +1,7 @@
+Change owner directly in the vRa postGre
+=========================================
+
+.. code-block::  psql
+
+   select * from cat_resource where name='xxxxxxxxxxxxxxx';
+ 
