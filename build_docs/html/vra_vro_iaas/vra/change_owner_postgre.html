@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Change owner directly in the vRa postGre &mdash; knowledge 1.0.0 documentation</title>
+  <title>Change owner in the vRa postGre &mdash; knowledge 1.0.0 documentation</title>
   
 
   
@@ -27,7 +27,9 @@
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Dump postgre table" href="dump_table.html" />
+    <link rel="prev" title="vRa" href="vra.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -77,9 +79,21 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../vra_vro_iaas.html">vRa</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../vra_vro_iaas.html">vRa - vRo - Iaas</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="vra.html">vRa</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Change owner in the vRa postGre</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dump_table.html">Dump postgre table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="change_request_status_postgre.html">Change request status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="change_vm_lease_postgre.html">Change vm lease in vRa postgre</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../vro/vro.html">vRo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iaas/iaas.html">Iaas</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../vra_vro_iaas.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../db/db.html">Database</a></li>
 </ul>
 
             
@@ -125,7 +139,11 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>Change owner directly in the vRa postGre</li>
+          <li><a href="../vra_vro_iaas.html">vRa - vRo - Iaas</a> &raquo;</li>
+        
+          <li><a href="vra.html">vRa</a> &raquo;</li>
+        
+      <li>Change owner in the vRa postGre</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -144,8 +162,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="change-owner-directly-in-the-vra-postgre">
-<span id="change-owner-postgre"></span><h1>Change owner directly in the vRa postGre<a class="headerlink" href="#change-owner-directly-in-the-vra-postgre" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="change-owner-in-the-vra-postgre">
+<span id="change-owner-postgre"></span><h1>Change owner in the vRa postGre<a class="headerlink" href="#change-owner-in-the-vra-postgre" title="Permalink to this headline">¶</a></h1>
 <p>Get the vm id from the cat_resource table</p>
 <div class="highlight-psql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">cat_resource</span> <span class="k">where</span> <span class="k">name</span><span class="o">=</span><span class="s1">&#39;my_vm_name&#39;</span><span class="p">;</span>
 </pre></div>
@@ -170,7 +188,7 @@
 <div class="highlight-psql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">cat_resource_owners</span> <span class="k">where</span> <span class="n">resource_id</span><span class="o">=</span><span class="s1">&#39;my_resource_id&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>To avoid inconsistency, you also should have to modifiy it in the iaas db, see <a class="reference internal" href="../iaas/change_owner_iaas.html#change-owner-iaas"><span class="std std-ref">Change owner directly in the vRa Iaas</span></a></p>
+<p>To avoid inconsistency, you also should have to modifiy it in the iaas db, see <a class="reference internal" href="../iaas/change_owner_iaas.html#change-owner-iaas"><span class="std std-ref">Change owner in the vRa Iaas db</span></a></p>
 </div>
 
 
@@ -178,6 +196,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dump_table.html" class="btn btn-neutral float-right" title="Dump postgre table" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="vra.html" class="btn btn-neutral" title="vRa" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

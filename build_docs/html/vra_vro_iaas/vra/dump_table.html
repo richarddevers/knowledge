@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Change owner in the vRa Iaas db &mdash; knowledge 1.0.0 documentation</title>
+  <title>Dump postgre table &mdash; knowledge 1.0.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Change vm lease in iaas db" href="change_vm_lease_iaas.html" />
-    <link rel="prev" title="Iaas" href="iaas.html" /> 
+    <link rel="next" title="Change request status" href="change_request_status.html" />
+    <link rel="prev" title="Change owner directly in the vRa postGre" href="change_owner_postgre.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -81,13 +81,14 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../vra_vro_iaas.html">vRa - vRo - Iaas</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../vra/vra.html">vRa</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../vro/vro.html">vRo</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="iaas.html">Iaas</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Change owner in the vRa Iaas db</a></li>
-<li class="toctree-l3"><a class="reference internal" href="change_vm_lease_iaas.html">Change vm lease in iaas db</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vra.html">vRa</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="change_owner_postgre.html">Change owner directly in the vRa postGre</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Dump postgre table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="change_request_status.html">Change request status</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../vro/vro.html">vRo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iaas/iaas.html">Iaas</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../vra_vro_iaas.html#indices-and-tables">Indices and tables</a></li>
@@ -139,15 +140,15 @@
         
           <li><a href="../vra_vro_iaas.html">vRa - vRo - Iaas</a> &raquo;</li>
         
-          <li><a href="iaas.html">Iaas</a> &raquo;</li>
+          <li><a href="vra.html">vRa</a> &raquo;</li>
         
-      <li>Change owner in the vRa Iaas db</li>
+      <li>Dump postgre table</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/vra_vro_iaas/iaas/change_owner_iaas.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/vra_vro_iaas/vra/dump_table.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -160,14 +161,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="change-owner-in-the-vra-iaas-db">
-<span id="change-owner-iaas"></span><h1>Change owner in the vRa Iaas db<a class="headerlink" href="#change-owner-in-the-vra-iaas-db" title="Permalink to this headline">¶</a></h1>
-<p>Find new owner id</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">users</span> <span class="k">where</span> <span class="n">userName</span> <span class="k">like</span> <span class="s1">&#39;%John Doe%&#39;</span>
-</pre></div>
-</div>
-<p>Update the virtualmachine with the new owner</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">set</span> <span class="k">Owner</span> <span class="o">=</span> <span class="s1">&#39;new_owner_id&#39;</span> <span class="k">where</span> <span class="n">VirtualMachineName</span><span class="o">=</span> <span class="s1">&#39;my_vm_name&#39;</span>
+  <div class="section" id="dump-postgre-table">
+<h1>Dump postgre table<a class="headerlink" href="#dump-postgre-table" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/opt/vmware/vpostgres/current/bin/pg_dump -U postgres --table<span class="o">=</span>comp_bprequest --data-only --column-inserts vcac &gt; /storage/db/comp_bprequest.sql
 </pre></div>
 </div>
 </div>
@@ -180,10 +176,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="change_vm_lease_iaas.html" class="btn btn-neutral float-right" title="Change vm lease in iaas db" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="change_request_status.html" class="btn btn-neutral float-right" title="Change request status" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="iaas.html" class="btn btn-neutral" title="Iaas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="change_owner_postgre.html" class="btn btn-neutral" title="Change owner directly in the vRa postGre" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

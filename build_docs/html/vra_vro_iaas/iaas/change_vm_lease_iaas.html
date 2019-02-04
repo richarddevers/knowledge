@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Change owner in the vRa Iaas db &mdash; knowledge 1.0.0 documentation</title>
+  <title>Change vm lease in iaas db &mdash; knowledge 1.0.0 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Change vm lease in iaas db" href="change_vm_lease_iaas.html" />
-    <link rel="prev" title="Iaas" href="iaas.html" /> 
+    <link rel="next" title="Database" href="../../db/db.html" />
+    <link rel="prev" title="Change owner in the vRa Iaas db" href="change_owner_iaas.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -84,8 +84,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../vra/vra.html">vRa</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vro/vro.html">vRo</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="iaas.html">Iaas</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Change owner in the vRa Iaas db</a></li>
-<li class="toctree-l3"><a class="reference internal" href="change_vm_lease_iaas.html">Change vm lease in iaas db</a></li>
+<li class="toctree-l3"><a class="reference internal" href="change_owner_iaas.html">Change owner in the vRa Iaas db</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Change vm lease in iaas db</a></li>
 </ul>
 </li>
 </ul>
@@ -141,13 +141,13 @@
         
           <li><a href="iaas.html">Iaas</a> &raquo;</li>
         
-      <li>Change owner in the vRa Iaas db</li>
+      <li>Change vm lease in iaas db</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/vra_vro_iaas/iaas/change_owner_iaas.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/vra_vro_iaas/iaas/change_vm_lease_iaas.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -160,16 +160,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="change-owner-in-the-vra-iaas-db">
-<span id="change-owner-iaas"></span><h1>Change owner in the vRa Iaas db<a class="headerlink" href="#change-owner-in-the-vra-iaas-db" title="Permalink to this headline">¶</a></h1>
-<p>Find new owner id</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">users</span> <span class="k">where</span> <span class="n">userName</span> <span class="k">like</span> <span class="s1">&#39;%John Doe%&#39;</span>
+  <div class="section" id="change-vm-lease-in-iaas-db">
+<span id="change-vm-lease-iaas"></span><h1>Change vm lease in iaas db<a class="headerlink" href="#change-vm-lease-in-iaas-db" title="Permalink to this headline">¶</a></h1>
+<p>Find data about your vm</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">VirtualMachineID</span><span class="p">,</span> <span class="n">VirtualMachineName</span><span class="p">,</span> <span class="n">Expires</span> <span class="k">from</span> <span class="n">VirtualMachine</span> <span class="k">where</span> <span class="n">VirtualMachineName</span><span class="o">=</span><span class="s1">&#39;my_vm_name&#39;</span> <span class="k">and</span> <span class="n">IsManaged</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<p>Update the virtualmachine with the new owner</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">set</span> <span class="k">Owner</span> <span class="o">=</span> <span class="s1">&#39;new_owner_id&#39;</span> <span class="k">where</span> <span class="n">VirtualMachineName</span><span class="o">=</span> <span class="s1">&#39;my_vm_name&#39;</span>
+<p>Update the lease date</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">update</span> <span class="k">into</span> <span class="n">VirtualMachine</span> <span class="p">(</span><span class="n">Expires</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="ss">&quot;2020-12-31 22:59:59.000&quot;</span><span class="p">)</span> <span class="k">where</span> <span class="n">VirtualMachineID</span><span class="o">=</span><span class="s1">&#39;my_vm_id&#39;</span>
 </pre></div>
 </div>
+<p>Check the result</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">VirtualMachineID</span><span class="p">,</span> <span class="n">VirtualMachineName</span><span class="p">,</span> <span class="n">Expires</span> <span class="k">from</span> <span class="n">VirtualMachine</span> <span class="k">where</span> <span class="n">VirtualMachineID</span> <span class="o">=</span> <span class="s1">&#39;my_vm_id&#39;</span>
+</pre></div>
+</div>
+<p>To avoir inconsistency, you should also do it in the iaas db, see <a class="reference internal" href="../vra/change_vm_lease_postgre.html#change-vm-lease-postgre"><span class="std std-ref">Change vm lease in vRa postgre</span></a></p>
 </div>
 
 
@@ -180,10 +185,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="change_vm_lease_iaas.html" class="btn btn-neutral float-right" title="Change vm lease in iaas db" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../db/db.html" class="btn btn-neutral float-right" title="Database" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="iaas.html" class="btn btn-neutral" title="Iaas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="change_owner_iaas.html" class="btn btn-neutral" title="Change owner in the vRa Iaas db" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

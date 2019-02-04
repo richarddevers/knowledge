@@ -1,3 +1,5 @@
+.. _postgre_transaction:
+
 Transaction
 ===========
 

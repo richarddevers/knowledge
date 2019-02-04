@@ -1,30 +1,16 @@
 .. _change_owner_iaas:
 
-Change owner directly in the vRa Iaas, db
+Change owner in the vRa Iaas db
 =========================================
 
-Get the id of the current owner
-
-.. code-block:: sql
-
-    select Owner from VirtualMachine where VirtualMachineName= 'my_vm_name' 
-
-Check if the current user exist
-
-.. code-block.. sql
-
-    select * from users where userid ='current_owner_id' 
-
-Get the new owner id
+Find new owner id
 
 .. code-block:: sql
 
     select * from users where userName like '%John Doe%'
 
-Update the vm with the new owner id
+Update the virtualmachine with the new owner
 
 .. code-block:: sql
 
-    set Owner = new_owner_id where VirtualMachineName= 'my_vm_name'
-
-To avoid inconsistency, you also should have to modifiy it in the vRa postgre db, see :ref:`change_owner_postgre`
+    set Owner = 'new_owner_id' where VirtualMachineName= 'my_vm_name'
