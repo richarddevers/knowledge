@@ -6,6 +6,7 @@ knowledge
    :caption: Contents:
 
    vra_vro_iaas/vra_vro_iaas
+   db/db
 
 Indices and tables
 ==================
