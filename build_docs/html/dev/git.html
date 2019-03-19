@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>git &mdash; knowledge 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OpenStack" href="../openstack/openstack.html" />
+    <link rel="prev" title="Development" href="dev.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> knowledge
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../db/db.html">Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vmware/vmware.html">Vmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vmware/vmware.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="dev.html">Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">git</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openstack/openstack.html">OpenStack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openstack/openstack.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">knowledge</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="dev.html">Development</a> &raquo;</li>
+        
+      <li>git</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/dev/git.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="git">
+<h1>git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h1>
+<p>&lt;git init&gt; init a repo</p>
+<p>&lt;git status&gt; get status of what has been staged or not…</p>
+<p>&lt;git rm –cached &lt;file&gt;…&gt; to unstage</p>
+<p>“git add &lt;file&gt;….” add a file to staging</p>
+<p>“git add .” add all files to staging</p>
+<p>“git commit -m “revision one”” commit files with revision file</p>
+<p>“git log” get commit log…</p>
+<p>“git checkout &lt;file_name&gt;” discard changes in working directory</p>
+<p>“git reset HEAD &lt;file&gt;”  remove commit from the staging environment</p>
+<p>“git add –all” add all modification to the staging environment</p>
+<p>“git checkout &lt;hash&gt;” rollback to a specified commit</p>
+<p>“git branch” see branches list( local only)</p>
+<p>“git branch -a” see all branches list</p>
+<p>“git checkout &lt;branch&gt;”  go to specified branch</p>
+<p>“git branch &lt;name&gt; &lt;hash&gt;” create a new branch to the specified hash states</p>
+<p>“git merge &lt;branch&gt;” merge the &lt;branch&gt; to the current one</p>
+<p>“git branch -m &lt;branch&gt;” &lt;new_name_branch&gt; rename a branch</p>
+<p>“git branch -D &lt;branch&gt;” delete a local branch</p>
+<p>“git push origin –delete &lt;branch_name&gt;” delete a remote branch</p>
+<p>“git reset –hard &lt;hash&gt;” specify new head</p>
+<p>“git checkout -b &lt;new_local_branch&gt; &lt;remote_branch&gt;”
+-&gt; Example: “git checkout -b 02_01 origin/02_01”  -&gt; Clone the remote branch “origin/02_01” on the local branch “02_01”</p>
+<p>“git clone -b &lt;branch&gt; clone a specific branch</p>
+<p>“git stash” mettre en mémoire les modification actuelle et checkout</p>
+<p>“git stash apply” reappliquer ces modifs</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../openstack/openstack.html" class="btn btn-neutral float-right" title="OpenStack" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dev.html" class="btn btn-neutral float-left" title="Development" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Richard DEVERS
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

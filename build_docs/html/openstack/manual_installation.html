@@ -1,0 +1,850 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Manual installation &mdash; knowledge 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> knowledge
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../db/db.html">Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vmware/vmware.html">Vmware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vmware/vmware.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">knowledge</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Manual installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/openstack/manual_installation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="manual-installation">
+<h1>Manual installation<a class="headerlink" href="#manual-installation" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh -e</span>
+
+<span class="c1">#Pour swift il faut spécifier P1, P2 et P3</span>
+<span class="c1">#Surement à /dev/sda6, /dev/sda7 et /dev/sda8</span>
+<span class="c1">#Specifier /var/file1, /var/file2, /var/file3 pour utiliser des fichiers</span>
+<span class="c1">#montés en loop pour la formation sur les VM Cloudwatt</span>
+<span class="c1">#P1=/dev/sda6</span>
+<span class="c1">#P2=/dev/sda7</span>
+<span class="c1">#P3=/dev/sda8</span>
+
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$USER</span> !<span class="o">=</span> <span class="s1">&#39;root&#39;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Must be root.&quot;</span>
+    <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nv">APTINSTALL</span><span class="o">=</span><span class="s2">&quot;apt install -y --force-yes -o Dpkg::Options::=--force-confold&quot;</span>
+
+get_id <span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> <span class="sb">`</span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;/ id / { print $4 }&#39;</span><span class="sb">`</span>
+<span class="o">}</span>
+
+deploy_mysql <span class="o">()</span> <span class="o">{</span>
+    apt update
+    apt install ubuntu-cloud-keyring -y
+    <span class="nb">echo</span> <span class="s1">&#39;deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/pike main&#39;</span> &gt; /etc/apt/sources.list.d/pike.list
+    apt update
+
+    <span class="nv">$APTINSTALL</span> python-pymysql mariadb-server
+
+    mkdir -p /etc/mysql/mariadb.conf.d
+    cp configs/mariadb.conf /etc/mysql/mariadb.conf.d/60-openstack.cnf
+
+    systemctl restart mysql
+<span class="o">}</span>
+
+deploy_rabbit <span class="o">()</span> <span class="o">{</span>
+    <span class="nv">$APTINSTALL</span> rabbitmq-server
+    rabbitmqctl add_user openstack openstack
+    rabbitmqctl set_permissions openstack <span class="s2">&quot;.*&quot;</span> <span class="s2">&quot;.*&quot;</span> <span class="s2">&quot;.*&quot;</span>
+<span class="o">}</span>
+
+deploy_keystone <span class="o">()</span> <span class="o">{</span>
+    mysql -uroot -proot <span class="s">&lt;&lt; EOF</span>
+<span class="s">DROP DATABASE IF EXISTS keystonedb;</span>
+<span class="s">CREATE DATABASE keystonedb;</span>
+<span class="s">GRANT ALL ON keystonedb.* TO &#39;keystone&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;keystonemypass&#39;;</span>
+<span class="s">GRANT ALL ON keystonedb.* TO &#39;keystone&#39;@&#39;%&#39; IDENTIFIED BY &#39;keystonemypass&#39;;</span>
+<span class="s">EOF</span>
+
+    apt update
+    <span class="nv">$APTINSTALL</span> keystone python-openstackclient
+    cp configs/keystone.conf /etc/keystone/keystone.conf
+    keystone-manage db_sync
+    keystone-manage fernet_setup --keystone-user keystone --keystone-group keystone
+
+    keystone-manage bootstrap <span class="se">\</span>
+        --bootstrap-username admin <span class="se">\</span>
+        --bootstrap-password adminpass <span class="se">\</span>
+        --bootstrap-project-name admin <span class="se">\</span>
+        --bootstrap-role-name admin <span class="se">\</span>
+        --bootstrap-service-name keystone <span class="se">\</span>
+        --bootstrap-admin-url http://controller:35357/v3 <span class="se">\</span>
+        --bootstrap-public-url http://controller:5000/v3 <span class="se">\</span>
+        --bootstrap-internal-url http://controller:5000/v3 <span class="se">\</span>
+        --bootstrap-region-id RegionOne
+
+    systemctl restart apache2
+
+    sleep <span class="m">5</span>
+
+    <span class="nb">export</span> <span class="nv">OS_PROJECT_DOMAIN_ID</span><span class="o">=</span>default
+    <span class="nb">export</span> <span class="nv">OS_USER_DOMAIN_ID</span><span class="o">=</span>default
+    <span class="nb">export</span> <span class="nv">OS_PROJECT_NAME</span><span class="o">=</span>admin
+    <span class="nb">export</span> <span class="nv">OS_TENANT_NAME</span><span class="o">=</span>admin
+    <span class="nb">export</span> <span class="nv">OS_USERNAME</span><span class="o">=</span>admin
+    <span class="nb">export</span> <span class="nv">OS_PASSWORD</span><span class="o">=</span>adminpass
+    <span class="nb">export</span> <span class="nv">OS_AUTH_URL</span><span class="o">=</span>http://controller:5000/v3
+    <span class="nb">export</span> <span class="nv">OS_REGION_NAME</span><span class="o">=</span>RegionOne
+    <span class="nb">export</span> <span class="nv">OS_IDENTITY_API_VERSION</span><span class="o">=</span><span class="m">3</span>
+
+    openstack project create demo
+    openstack project create service
+    openstack role add --project demo --user admin admin
+
+    cat &gt; ~/admrc <span class="s">&lt;&lt; EOF</span>
+<span class="s">export OS_PROJECT_DOMAIN_ID=default</span>
+<span class="s">export OS_USER_DOMAIN_ID=default</span>
+<span class="s">export OS_PROJECT_NAME=demo</span>
+<span class="s">export OS_TENANT_NAME=demo</span>
+<span class="s">export OS_USERNAME=admin</span>
+<span class="s">export OS_PASSWORD=adminpass</span>
+<span class="s">export OS_AUTH_URL=http://controller:5000/v3</span>
+<span class="s">export OS_REGION_NAME=RegionOne</span>
+<span class="s">export OS_IDENTITY_API_VERSION=3</span>
+<span class="s">export OS_VOLUME_API_VERSION=2</span>
+<span class="s">export OS_IMAGE_API_VERSION=2</span>
+<span class="s">EOF</span>
+
+    grep -q admrc ~/.bashrc <span class="o">||</span> <span class="nb">echo</span> <span class="s1">&#39;. ~/admrc&#39;</span> &gt;&gt; ~/.bashrc
+<span class="o">}</span>
+
+deploy_glance <span class="o">()</span> <span class="o">{</span>
+    . ~/admrc
+
+    mysql -uroot -proot <span class="s">&lt;&lt; EOF</span>
+<span class="s">DROP DATABASE IF EXISTS glancedb;</span>
+<span class="s">CREATE DATABASE glancedb;</span>
+<span class="s">GRANT ALL ON glancedb.* TO &#39;glance&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;glancemypass&#39;;</span>
+<span class="s">GRANT ALL ON glancedb.* TO &#39;glance&#39;@&#39;%&#39; IDENTIFIED BY &#39;glancemypass&#39;;</span>
+<span class="s">EOF</span>
+
+    apt update
+    <span class="nv">$APTINSTALL</span> glance-api
+    cp configs/glance-api.conf /etc/glance
+    glance-manage db_sync
+    glance-manage db_load_metadefs
+
+    openstack user create --password glancekeypass glance
+    openstack role add --project service --user glance admin
+    openstack service create --name glance <span class="se">\</span>
+        --description <span class="s2">&quot;OpenStack Image service&quot;</span> image
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        image public http://controller:9292
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        image internal http://controller:9292
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        image admin http://controller:9292
+
+    systemctl restart glance-api.service
+    sleep <span class="m">5</span>
+
+    grep OS_IMAGE_API_VERSION ~/admrc <span class="o">||</span> <span class="nb">echo</span> <span class="s2">&quot;export OS_IMAGE_API_VERSION=2&quot;</span> &gt;&gt; ~/admrc
+    wget http://archive.objectif-libre.com/images/cirros-0.3.4-x86_64-disk.img <span class="se">\</span>
+        -O cirros-0.3.4-x86_64-disk.img
+    openstack image create --disk-format qcow2 <span class="se">\</span>
+        --public --file cirros-0.3.4-x86_64-disk.img CirrOS
+<span class="o">}</span>
+
+deploy_nova <span class="o">()</span> <span class="o">{</span>
+    . ~/admrc
+
+    mysql -uroot -proot <span class="s">&lt;&lt; EOF</span>
+<span class="s">DROP DATABASE IF EXISTS novadb;</span>
+<span class="s">CREATE DATABASE novadb;</span>
+<span class="s">GRANT ALL ON novadb.* TO &#39;nova&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;novamypass&#39;;</span>
+<span class="s">GRANT ALL ON novadb.* TO &#39;nova&#39;@&#39;%&#39; IDENTIFIED BY &#39;novamypass&#39;;</span>
+<span class="s">DROP DATABASE IF EXISTS novaapidb;</span>
+<span class="s">CREATE DATABASE novaapidb;</span>
+<span class="s">GRANT ALL ON novaapidb.* TO &#39;nova&#39;@&#39;%&#39; IDENTIFIED BY &#39;novamypass&#39;;</span>
+<span class="s">GRANT ALL ON novaapidb.* TO &#39;nova&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;novamypass&#39;;</span>
+<span class="s">DROP DATABASE IF EXISTS novadb_cell0;</span>
+<span class="s">CREATE DATABASE novadb_cell0;</span>
+<span class="s">GRANT ALL ON novadb_cell0.* TO &#39;nova&#39;@&#39;%&#39; IDENTIFIED BY &#39;novamypass&#39;;</span>
+<span class="s">GRANT ALL ON novadb_cell0.* TO &#39;nova&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;novamypass&#39;;</span>
+<span class="s">EOF</span>
+
+    apt update
+    <span class="nv">$APTINSTALL</span> nova-api nova-scheduler nova-conductor <span class="se">\</span>
+        nova-novncproxy nova-consoleauth nova-placement-api
+
+    cp configs/nova.conf /etc/nova/nova.conf
+    nova-manage api_db sync
+    <span class="c1"># Config Cells_v2 From https://docs.openstack.org/developer/nova/cells.html :</span>
+    <span class="c1"># nova-manage will use the [database]/connection value from your config file,</span>
+    <span class="c1"># and mangle the database name to have a _cell0 suffix</span>
+    nova-manage cell_v2 map_cell0
+    <span class="c1"># cell0 is a special cell, we now must create a regular default cell where</span>
+    <span class="c1"># to put all our hosts</span>
+    nova-manage cell_v2 create_cell --name cell1
+    <span class="c1"># Run common database migration</span>
+    nova-manage db sync
+
+    <span class="c1"># Nova API</span>
+    openstack user create --password novakeypass nova
+    openstack role add --project service --user nova admin
+    openstack service create --name nova <span class="se">\</span>
+        --description <span class="s2">&quot;OpenStack Compute API&quot;</span> compute
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        compute public http://controller:8774/v2.1
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        compute internal http://controller:8774/v2.1
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        compute admin http://controller:8774/v2.1
+
+    <span class="c1"># Nova placement API</span>
+    openstack user create --password placementkeypass placement
+    openstack role add --project service --user placement admin
+    openstack service create --name placement <span class="se">\</span>
+        --description <span class="s2">&quot;OpenStack Placement API&quot;</span> placement
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        placement public http://controller:8778
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        placement internal http://controller:8778
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        placement admin http://controller:8778
+
+    <span class="k">for</span> i in api conductor novncproxy consoleauth scheduler<span class="p">;</span> <span class="k">do</span>
+        systemctl restart nova-<span class="nv">$i</span>
+    <span class="k">done</span>
+<span class="o">}</span>
+
+deploy_horizon <span class="o">()</span> <span class="o">{</span>
+    apt update
+    <span class="nv">$APTINSTALL</span> openstack-dashboard
+
+    cat &gt;&gt; /etc/openstack-dashboard/local_settings.py <span class="s">&lt;&lt; EOF</span>
+
+<span class="s">OPENSTACK_API_VERSIONS = {</span>
+<span class="s">    &quot;identity&quot;: 3,</span>
+<span class="s">    &quot;volume&quot;: 2,</span>
+<span class="s">    &quot;compute&quot;: 2,</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+    sed -i <span class="s1">&#39;s/^OPENSTACK_HOST.*/OPENSTACK_HOST = &quot;192.168.122.10&quot;/&#39;</span> /etc/openstack-dashboard/local_settings.py
+    sed -i <span class="s1">&#39;s/^DEFAULT_THEME.*/DEFAULT_THEME = &quot;default&quot;/&#39;</span> /etc/openstack-dashboard/local_settings.py
+
+    systemctl restart apache2.service
+<span class="o">}</span>
+
+deploy_neutron <span class="o">()</span> <span class="o">{</span>
+    . ~/admrc
+
+    mysql -uroot -proot <span class="s">&lt;&lt; EOF</span>
+<span class="s">DROP DATABASE IF EXISTS neutrondb;</span>
+<span class="s">CREATE DATABASE neutrondb;</span>
+<span class="s">GRANT ALL ON neutrondb.* TO &#39;neutron&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;neutronmypass&#39;;</span>
+<span class="s">GRANT ALL ON neutrondb.* TO &#39;neutron&#39;@&#39;%&#39; IDENTIFIED BY &#39;neutronmypass&#39;;</span>
+<span class="s">EOF</span>
+
+    <span class="c1"># then neutron</span>
+    cat &gt; /etc/sysctl.d/20-neutron.conf <span class="s">&lt;&lt; EOF</span>
+<span class="s">net.ipv4.ip_forward=1</span>
+<span class="s">net.ipv4.conf.all.rp_filter=0</span>
+<span class="s">net.ipv4.conf.default.rp_filter=0</span>
+<span class="s">EOF</span>
+    modprobe bridge
+    sysctl -p /etc/sysctl.d/20-neutron.conf
+
+    apt update
+    <span class="nv">$APTINSTALL</span> neutron-server neutron-plugin-ml2 neutron-openvswitch-agent <span class="se">\</span>
+        neutron-l3-agent neutron-dhcp-agent
+    <span class="k">for</span> i in neutron.conf l3_agent.ini dhcp_agent.ini metadata_agent.ini<span class="p">;</span> <span class="k">do</span>
+        cp configs/<span class="nv">$i</span> /etc/neutron/
+    <span class="k">done</span>
+    <span class="nb">echo</span> <span class="s1">&#39;dhcp-option-force=26,1450&#39;</span> &gt; /etc/neutron/dnsmasq.conf
+    cp configs/ml2_conf.ini /etc/neutron/plugins/ml2/ml2_conf.ini
+    ln -sf ml2_conf.ini /etc/neutron/plugins/ml2/openvswitch_agent.ini
+
+    openstack user create --password neutronkeypass neutron
+    openstack role add --project service --user neutron admin
+    openstack service create --name neutron <span class="se">\</span>
+        --description <span class="s2">&quot;OpenStack Networking&quot;</span> network
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        network public http://controller:9696
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        network internal http://controller:9696
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        network admin http://controller:9696
+
+    neutron-db-manage --config-file /etc/neutron/neutron.conf <span class="se">\</span>
+        --config-file /etc/neutron/plugins/ml2/ml2_conf.ini <span class="se">\</span>
+        upgrade head
+
+    cat &gt;/etc/network/interfaces <span class="s">&lt;&lt; EOF</span>
+<span class="s">auto lo</span>
+<span class="s">iface lo inet loopback</span>
+
+<span class="s">auto eth0</span>
+<span class="s">iface eth0 inet static</span>
+<span class="s">address 192.168.122.10</span>
+<span class="s">netmask 255.255.255.0</span>
+<span class="s">gateway 192.168.122.1</span>
+<span class="s">dns-nameservers 8.8.8.8</span>
+
+<span class="s">auto eth1</span>
+<span class="s">iface eth1 inet static</span>
+<span class="s">address 192.168.123.10</span>
+<span class="s">netmask 255.255.255.0</span>
+
+<span class="s">auto eth2</span>
+<span class="s">iface eth2 inet static</span>
+<span class="s">address 0.0.0.0</span>
+
+<span class="s">auto br-ex</span>
+<span class="s">iface br-ex inet static</span>
+<span class="s">address 0.0.0.0</span>
+<span class="s">EOF</span>
+
+    ovs-vsctl add-br br-ex
+    ovs-vsctl add-port br-ex eth2
+    ifup eth1
+    ifconfig eth2 up
+    ifconfig br-ex up
+
+    <span class="k">for</span> i in server openvswitch-agent l3-agent dhcp-agent metadata-agent<span class="p">;</span> <span class="k">do</span>
+        service neutron-<span class="nv">$i</span> restart
+    <span class="k">done</span>
+<span class="o">}</span>
+
+deploy_cinder <span class="o">()</span> <span class="o">{</span>
+    . ~/admrc
+
+    mysql -uroot -proot <span class="s">&lt;&lt; EOF</span>
+<span class="s">DROP DATABASE IF EXISTS cinderdb;</span>
+<span class="s">CREATE DATABASE cinderdb;</span>
+<span class="s">GRANT ALL ON cinderdb.* TO &#39;cinder&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;cindermypass&#39;;</span>
+<span class="s">GRANT ALL ON cinderdb.* TO &#39;cinder&#39;@&#39;%&#39; IDENTIFIED BY &#39;cindermypass&#39;;</span>
+<span class="s">EOF</span>
+
+    apt update
+    <span class="nv">$APTINSTALL</span> cinder-scheduler cinder-api cinder-volume thin-provisioning-tools
+
+    pvcreate -ff /dev/vdb
+    vgcreate -ff cinder-volumes /dev/vdb
+
+    cp configs/cinder.conf /etc/cinder/cinder.conf
+    cinder-manage db sync
+
+    openstack user create --password cinderkeypass cinder
+    openstack role add --project service --user cinder admin
+    openstack service create --name cinder <span class="se">\</span>
+        --description <span class="s2">&quot;OpenStack Block Storage&quot;</span> volume
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        volume public http://controller:8776/v1/%<span class="se">\(</span>tenant_id<span class="se">\)</span>s
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        volume internal http://controller:8776/v1/%<span class="se">\(</span>tenant_id<span class="se">\)</span>s
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        volume admin http://controller:8776/v1/%<span class="se">\(</span>tenant_id<span class="se">\)</span>s
+    openstack service create --name cinderv2 <span class="se">\</span>
+        --description <span class="s2">&quot;OpenStack Block Storage&quot;</span> volumev2
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        volumev2 public http://controller:8776/v2/%<span class="se">\(</span>tenant_id<span class="se">\)</span>s
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        volumev2 internal http://controller:8776/v2/%<span class="se">\(</span>tenant_id<span class="se">\)</span>s
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        volumev2 admin http://controller:8776/v2/%<span class="se">\(</span>tenant_id<span class="se">\)</span>s
+    openstack service create --name cinderv3 <span class="se">\</span>
+        --description <span class="s2">&quot;OpenStack Block Storage&quot;</span> volumev3
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        volumev3 public http://controller:8776/v3/%<span class="se">\(</span>project_id<span class="se">\)</span>s
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        volumev3 internal http://controller:8776/v3/%<span class="se">\(</span>project_id<span class="se">\)</span>s
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        volumev3 admin http://controller:8776/v3/%<span class="se">\(</span>project_id<span class="se">\)</span>s
+
+    service lvm2-lvmetad restart
+    service apache2 restart
+    service cinder-scheduler restart
+    service cinder-volume restart
+    service nova-api restart
+
+    grep OS_VOLUME_API_VERSION ~/admrc <span class="o">||</span> <span class="nb">echo</span> <span class="s2">&quot;export OS_VOLUME_API_VERSION=2&quot;</span> &gt;&gt; ~/admrc
+<span class="o">}</span>
+
+deploy_compute <span class="o">()</span> <span class="o">{</span>
+    cat &gt; ~/admrc <span class="s">&lt;&lt; EOF</span>
+<span class="s">export OS_PROJECT_DOMAIN_ID=default</span>
+<span class="s">export OS_USER_DOMAIN_ID=default</span>
+<span class="s">export OS_PROJECT_NAME=demo</span>
+<span class="s">export OS_TENANT_NAME=demo</span>
+<span class="s">export OS_USERNAME=admin</span>
+<span class="s">export OS_PASSWORD=adminpass</span>
+<span class="s">export OS_AUTH_URL=http://controller:5000/v3</span>
+<span class="s">export OS_REGION_NAME=RegionOne</span>
+<span class="s">export OS_IDENTITY_API_VERSION=3</span>
+<span class="s">export OS_VOLUME_API_VERSION=2</span>
+<span class="s">export OS_IMAGE_API_VERSION=2</span>
+<span class="s">EOF</span>
+    . ~/admrc
+
+    <span class="nv">MYIP</span><span class="o">=</span><span class="k">$(</span>ifconfig <span class="p">|</span> egrep -o <span class="s1">&#39;addr:192.168.122.[^ ]+&#39;</span> <span class="p">|</span> cut -d: -f2<span class="k">)</span>
+    <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$MYIP</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;IP non trouvée&quot;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit</span> <span class="m">1</span>
+
+    <span class="nv">MYNEUTRONIP</span><span class="o">=</span><span class="k">$(</span>ifconfig <span class="p">|</span> egrep -o <span class="s1">&#39;addr:192.168.123.[^ ]+&#39;</span> <span class="p">|</span> cut -d: -f2<span class="k">)</span>
+    <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$MYNEUTRONIP</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;IP non trouvée&quot;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit</span> <span class="m">1</span>
+
+    apt update
+    <span class="nv">$APTINSTALL</span> nova-compute-kvm nova-compute <span class="se">\</span>
+        neutron-plugin-ml2 neutron-openvswitch-agent
+
+    cat &gt; /etc/sysctl.d/20-neutron.conf <span class="s">&lt;&lt; EOF</span>
+<span class="s">net.ipv4.ip_forward=1</span>
+<span class="s">net.ipv4.conf.all.rp_filter=0</span>
+<span class="s">net.ipv4.conf.default.rp_filter=0</span>
+<span class="s">EOF</span>
+    sysctl -p /etc/sysctl.d/20-neutron.conf
+
+    cp configs/neutron.conf /etc/neutron
+    cp configs/ml2_conf.ini /etc/neutron/plugins/ml2/ml2_conf.ini
+
+    sed -i <span class="s2">&quot;s/local_ip.*/local_ip = </span><span class="nv">$MYNEUTRONIP</span><span class="s2">/&quot;</span> /etc/neutron/plugins/ml2/ml2_conf.ini
+    sed -i <span class="s2">&quot;/bridge_mappings/d&quot;</span> /etc/neutron/plugins/ml2/ml2_conf.ini
+
+    ln -sf ml2_conf.ini /etc/neutron/plugins/ml2/openvswitch_agent.ini
+
+    cat &gt; /etc/nova/nova.conf <span class="s">&lt;&lt; EOF</span>
+<span class="s">[DEFAULT]</span>
+<span class="s">debug=True</span>
+<span class="s">dhcpbridge_flagfile=/etc/nova/nova.conf</span>
+<span class="s">dhcpbridge=/usr/bin/nova-dhcpbridge</span>
+<span class="s">log-dir=/var/log/nova</span>
+<span class="s">state_path=/var/lib/nova</span>
+<span class="s">force_dhcp_release=True</span>
+<span class="s">verbose=True</span>
+<span class="s">ec2_private_dns_show_ip=True</span>
+<span class="s">enabled_apis=osapi_compute,metadata</span>
+<span class="s">my_ip = 192.168.122.1</span>
+<span class="s">use_neutron = True</span>
+<span class="s">firewall_driver = nova.virt.firewall.NoopFirewallDriver</span>
+
+<span class="s">transport_url = rabbit://openstack:openstack@controller:5672</span>
+
+<span class="s">[api]</span>
+<span class="s">auth_strategy = keystone</span>
+
+<span class="s">[placement]</span>
+<span class="s">os_region_name = RegionOne</span>
+<span class="s">project_domain_name = Default</span>
+<span class="s">project_name = service</span>
+<span class="s">auth_type = password</span>
+<span class="s">user_domain_name = Default</span>
+<span class="s">auth_url = http://controller:35357/v3</span>
+<span class="s">username = placement</span>
+<span class="s">password = placementkeypass</span>
+
+<span class="s">[vnc]</span>
+<span class="s">enabled = True</span>
+<span class="s">novncproxy_port = 6080</span>
+<span class="s">novncproxy_host = 192.168.122.10</span>
+<span class="s">vncserver_listen = 192.168.122.1</span>
+<span class="s">vncserver_proxyclient_address = 192.168.122.1</span>
+<span class="s">novncproxy_base_url = http://192.168.122.10:6080/vnc_auto.html</span>
+
+<span class="s">[glance]</span>
+<span class="s">api_servers = http://controller:9292</span>
+
+<span class="s">[neutron]</span>
+<span class="s">url = http://controller:9696</span>
+<span class="s">auth_url = http://controller:35357</span>
+<span class="s">auth_type = password</span>
+<span class="s">project_domain_name = default</span>
+<span class="s">user_domain_name = default</span>
+<span class="s">region_name = RegionOne</span>
+<span class="s">project_name = service</span>
+<span class="s">username = neutron</span>
+<span class="s">password = neutronkeypass</span>
+<span class="s">EOF</span>
+
+    adduser nova kvm
+
+    service nova-compute restart
+    service neutron-openvswitch-agent restart
+
+    <span class="c1"># Map our new compute to &quot;cell1&quot; (default cell in our configuration)</span>
+    ssh root@controller nova-manage cell_v2 discover_hosts --verbose
+<span class="o">}</span>
+
+deploy_heat <span class="o">()</span> <span class="o">{</span>
+    . ~/admrc
+
+    mysql -uroot -proot <span class="s">&lt;&lt; EOF</span>
+<span class="s">DROP DATABASE IF EXISTS heatdb;</span>
+<span class="s">CREATE DATABASE heatdb;</span>
+<span class="s">GRANT ALL ON heatdb.* TO &#39;heat&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;heatmypass&#39;;</span>
+<span class="s">GRANT ALL ON heatdb.* TO &#39;heat&#39;@&#39;%&#39; IDENTIFIED BY &#39;heatmypass&#39;;</span>
+<span class="s">EOF</span>
+
+    apt update
+    <span class="nv">$APTINSTALL</span> heat-api heat-api-cfn heat-engine
+    cp configs/heat.conf /etc/heat/heat.conf
+    heat-manage db_sync
+
+    openstack user create --password heatkeypass heat
+    openstack role add --project service --user heat admin
+    openstack role create heat_stack_owner
+    openstack role create heat_stack_user
+    openstack service create --name heat <span class="se">\</span>
+        --description <span class="s2">&quot;Orchestration&quot;</span> orchestration
+    openstack service create --name heat-cfn <span class="se">\</span>
+        --description <span class="s2">&quot;Orchestration&quot;</span> cloudformation
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        orchestration public http://controller:8004/v1/%<span class="se">\(</span>tenant_id<span class="se">\)</span>s
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        orchestration internal http://controller:8004/v1/%<span class="se">\(</span>tenant_id<span class="se">\)</span>s
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        orchestration admin http://controller:8004/v1/%<span class="se">\(</span>tenant_id<span class="se">\)</span>s
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        cloudformation public http://controller:8000/v1
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        cloudformation internal http://controller:8000/v1
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        cloudformation admin http://controller:8000/v1
+
+    openstack domain create heat_user_domain
+    openstack user create <span class="se">\</span>
+        --domain heat_user_domain <span class="se">\</span>
+        --password heat_domain_pass <span class="se">\</span>
+        heat_domain_admin
+    openstack role add <span class="se">\</span>
+        --domain heat_user_domain <span class="se">\</span>
+        --user heat_domain_admin <span class="se">\</span>
+        admin
+
+    service heat-api restart
+    service heat-api-cfn restart
+    service heat-engine restart
+<span class="o">}</span>
+
+deploy_ceilometer <span class="o">()</span> <span class="o">{</span>
+    apt update
+    <span class="nv">$APTINSTALL</span> mongodb-server mongodb-clients python-pymongo
+    sed -i <span class="s1">&#39;s/127.0.0.1/0.0.0.0/&#39;</span> /etc/mongodb.conf
+    <span class="nb">echo</span> <span class="nv">smallfiles</span> <span class="o">=</span> <span class="nb">true</span> &gt;&gt; /etc/mongodb.conf
+    service mongodb stop
+    rm -f /var/lib/mongodb/journal/prealloc.*
+    service mongodb start
+    sleep <span class="m">10</span>
+    mongo --host controller --eval <span class="s1">&#39;</span>
+<span class="s1">    db = db.getSiblingDB(&quot;ceilometerdb&quot;);</span>
+<span class="s1">    db.addUser({user: &quot;ceilometer&quot;,</span>
+<span class="s1">    pwd: &quot;ceilometermypass&quot;,</span>
+<span class="s1">    roles: [ &quot;readWrite&quot;, &quot;dbAdmin&quot; ]})&#39;</span>
+
+    . ~/admrc
+
+    <span class="nv">$APTINSTALL</span> ceilometer-api ceilometer-collector ceilometer-agent-central <span class="se">\</span>
+        ceilometer-agent-notification ceilometer-alarm-evaluator ceilometer-alarm-notifier <span class="se">\</span>
+        python-ceilometerclient
+
+    cp configs/ceilometer.conf /etc/ceilometer/ceilometer.conf
+    keystone user-create --name<span class="o">=</span>ceilometer --pass<span class="o">=</span><span class="s2">&quot;ceilometerkeypass&quot;</span> --email<span class="o">=</span>ceilometer@forma.com
+    keystone user-role-add --user ceilometer --role admin --tenant service
+    <span class="nv">CEILOMETER_ID</span><span class="o">=</span><span class="k">$(</span>get_id keystone service-create --name ceilometer --type metering <span class="se">\</span>
+        --description <span class="s1">&#39;Telemetry Service&#39;</span><span class="k">)</span>
+    keystone endpoint-create --region RegionOne --service-id <span class="nv">$CEILOMETER_ID</span> <span class="se">\</span>
+        --publicurl <span class="s1">&#39;http://controller:8777&#39;</span> <span class="se">\</span>
+        --adminurl <span class="s1">&#39;http://controller:8777&#39;</span> <span class="se">\</span>
+        --internalurl <span class="s1">&#39;http://controller:8777&#39;</span>
+
+    service ceilometer-agent-central restart
+    service ceilometer-agent-notification restart
+    service ceilometer-api restart
+    service ceilometer-collector restart
+    service ceilometer-alarm-evaluator restart
+    service ceilometer-alarm-notifier restart
+<span class="o">}</span>
+
+deploy_swift <span class="o">()</span> <span class="o">{</span>
+    <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$P1</span><span class="s2">&quot;</span> -o -z <span class="s2">&quot;</span><span class="nv">$P2</span><span class="s2">&quot;</span> -o -z <span class="s2">&quot;</span><span class="nv">$P3</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;P1, P2 et P3 ne sont pas définies&quot;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit</span> <span class="m">1</span>
+
+    chown -R root:root /root/.ssh
+
+    scp root@controller:admrc .
+    . ./admrc
+
+    apt update
+    <span class="nv">$APTINSTALL</span> python-openstackclient
+
+    openstack user create --password swiftkeypass swift
+    openstack role add --project service --user swift admin
+    openstack service create --name swift <span class="se">\</span>
+        --description <span class="s2">&quot;OpenStack Object Storage&quot;</span> object-store
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        object-store public http://controller:8080/v1/AUTH_%<span class="se">\(</span>tenant_id<span class="se">\)</span>s
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        object-store internal http://controller:8080/v1/AUTH_%<span class="se">\(</span>tenant_id<span class="se">\)</span>s
+    openstack endpoint create --region RegionOne <span class="se">\</span>
+        object-store admin http://controller:8080/v1/AUTH_%<span class="se">\(</span>tenant_id<span class="se">\)</span>s
+
+    <span class="nv">$APTINSTALL</span> swift-account swift-container swift-object swift-object-expirer xfsprogs rsync swift
+    umount <span class="nv">$P1</span> <span class="o">||</span> <span class="nb">true</span>
+    umount <span class="nv">$P2</span> <span class="o">||</span> <span class="nb">true</span>
+    umount <span class="nv">$P3</span> <span class="o">||</span> <span class="nb">true</span>
+
+    grep -q <span class="s1">&#39;/dev/&#39;</span> <span class="nv">$P1</span> <span class="o">||</span> dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span><span class="nv">$P1</span> <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span><span class="m">5000</span>
+    mkfs.xfs -f <span class="nv">$P1</span>
+    mkdir -p /srv/node/d1
+    mount -t xfs <span class="nv">$P1</span> /srv/node/d1
+    grep -q <span class="s1">&#39;/dev/&#39;</span> <span class="nv">$P2</span> <span class="o">||</span> dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span><span class="nv">$P2</span> <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span><span class="m">5000</span>
+    mkfs.xfs -f <span class="nv">$P2</span>
+    mkdir -p /srv/node/d2
+    mount -t xfs <span class="nv">$P2</span> /srv/node/d2
+    grep -q <span class="s1">&#39;/dev/&#39;</span> <span class="nv">$P3</span> <span class="o">||</span> dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span><span class="nv">$P3</span> <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span><span class="m">5000</span>
+    mkfs.xfs -f <span class="nv">$P3</span>
+    mkdir -p /srv/node/d3
+    mount -t xfs <span class="nv">$P3</span> /srv/node/d3
+    chown -R swift:swift /srv/node
+
+    mkdir -p /etc/swift
+    cp configs/swift.conf /etc/swift/
+    cp configs/proxy-server.conf /tmp/
+    cp configs/rsyncd.conf /etc/
+    <span class="k">for</span> f in account-server.conf container-server.conf object-server.conf <span class="se">\</span>
+            container-reconciler.conf object-expirer.conf<span class="p">;</span> <span class="k">do</span>
+        cp configs/<span class="nv">$f</span> /etc/swift
+    <span class="k">done</span>
+    sed -i <span class="s1">&#39;s/^RSYNC_ENABLE=.*/RSYNC_ENABLE=true/&#39;</span> /etc/default/rsync
+    service rsync start
+
+    <span class="nb">cd</span> /etc/swift
+    swift-ring-builder account.builder create <span class="m">14</span> <span class="m">3</span> <span class="m">1</span>
+    swift-ring-builder container.builder create <span class="m">14</span> <span class="m">3</span> <span class="m">1</span>
+    swift-ring-builder object.builder create <span class="m">14</span> <span class="m">3</span> <span class="m">1</span>
+    swift-ring-builder object.builder add z1-192.168.122.1:6000/d1 <span class="m">100</span>
+    swift-ring-builder object.builder add z1-192.168.122.1:6000/d2 <span class="m">100</span>
+    swift-ring-builder object.builder add z1-192.168.122.1:6000/d3 <span class="m">100</span>
+    swift-ring-builder container.builder add z1-192.168.122.1:6001/d1 <span class="m">100</span>
+    swift-ring-builder container.builder add z1-192.168.122.1:6001/d2 <span class="m">100</span>
+    swift-ring-builder container.builder add z1-192.168.122.1:6001/d3 <span class="m">100</span>
+    swift-ring-builder account.builder add z1-192.168.122.1:6002/d1 <span class="m">100</span>
+    swift-ring-builder account.builder add z1-192.168.122.1:6002/d2 <span class="m">100</span>
+    swift-ring-builder account.builder add z1-192.168.122.1:6002/d3 <span class="m">100</span>
+    swift-ring-builder account.builder rebalance
+    swift-ring-builder container.builder rebalance
+    swift-ring-builder object.builder rebalance
+
+    chown -R swift:swift /etc/swift
+
+    ssh root@controller apt update
+    ssh root@controller <span class="nv">$APTINSTALL</span> swift swift-proxy memcached
+    ssh root@controller mkdir -p /etc/swift
+    scp /tmp/proxy-server.conf root@controller:/etc/swift/
+    scp /etc/swift/swift.conf root@controller:/etc/swift/
+    scp /etc/swift/*.gz root@controller:/etc/swift
+    ssh root@controller chown -R swift:swift /etc/swift
+    ssh root@controller swift-init proxy restart <span class="o">||</span> <span class="nb">true</span>
+    sleep <span class="m">5</span>
+    swift-init all restart
+<span class="o">}</span>
+
+deploy_networks <span class="o">()</span> <span class="o">{</span>
+    . ~/admrc
+    <span class="nv">ADMIN_ID</span><span class="o">=</span><span class="k">$(</span>openstack project list <span class="p">|</span> awk <span class="s1">&#39;/ admin / { print $2 }&#39;</span><span class="k">)</span>
+    neutron net-create public <span class="se">\</span>
+        --provider:network-type flat --provider:physical_network physnet1 <span class="se">\</span>
+        --router:external <span class="se">\</span>
+        --tenant-id <span class="nv">$ADMIN_ID</span>
+    neutron subnet-create public --name ext-subnet <span class="se">\</span>
+        --allocation-pool <span class="nv">start</span><span class="o">=</span><span class="m">192</span>.168.124.100,end<span class="o">=</span><span class="m">192</span>.168.124.254 <span class="se">\</span>
+        --gateway <span class="m">192</span>.168.124.1 --disable-dhcp <span class="m">192</span>.168.124.0/24 <span class="se">\</span>
+        --tenant-id <span class="nv">$ADMIN_ID</span>
+
+    neutron net-create demo-net1
+    neutron subnet-create --ip-version <span class="m">4</span> --name demo-subnet1 <span class="se">\</span>
+        --dns-nameserver <span class="m">8</span>.8.8.8 demo-net1 <span class="m">10</span>.5.5.0/24
+    neutron router-create router1
+    neutron router-interface-add router1 demo-subnet1
+    neutron router-gateway-set router1 public
+<span class="o">}</span>
+
+<span class="k">for</span> arg in <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="p">;</span> <span class="k">do</span>
+    deploy_<span class="nv">$arg</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Richard DEVERS
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

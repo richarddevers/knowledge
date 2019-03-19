@@ -5,8 +5,10 @@ knowledge
    :maxdepth: 2
    :caption: Contents:
 
-   vra_vro_iaas/vra_vro_iaas
    db/db
+   vmware/vmware
+   dev/dev
+   openstack/openstack
 
 Indices and tables
 ==================

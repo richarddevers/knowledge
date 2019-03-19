@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Dump postgre table &mdash; knowledge 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Change request status" href="change_request_status_postgre.html" />
+    <link rel="prev" title="Change owner in the vRa postGre" href="change_owner_postgre.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> knowledge
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../db/db.html">Database</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../vmware.html">Vmware</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../vra_vro_iaas.html">vRa - vRo - Iaas</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="vra.html">vRa</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="change_owner_postgre.html">Change owner in the vRa postGre</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Dump postgre table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dump-the-whole-postgre-db">Dump the whole postgre db</a></li>
+<li class="toctree-l4"><a class="reference internal" href="change_request_status_postgre.html">Change request status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="change_vm_lease_postgre.html">Change vm lease in vRa postgre</a></li>
+<li class="toctree-l4"><a class="reference internal" href="remove_node_from_cluster.html">Remove vRa node from cluster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reset_node.html">Force reset vRa node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="db_lock.html">Identiy DB locked</a></li>
+<li class="toctree-l4"><a class="reference internal" href="db_lock.html#delete-db-lock">Delete DB Lock</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../vro/vro.html">vRo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../iaas/iaas.html">Iaas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../troubleshoot.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../vra_vro_iaas.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../core/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../core/core.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../vmware.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">knowledge</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../vmware.html">Vmware</a> &raquo;</li>
+        
+          <li><a href="../vra_vro_iaas.html">vRa - vRo - Iaas</a> &raquo;</li>
+        
+          <li><a href="vra.html">vRa</a> &raquo;</li>
+        
+      <li>Dump postgre table</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/vmware/vra_vro_iaas/vra/dump_table.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dump-postgre-table">
+<h1>Dump postgre table<a class="headerlink" href="#dump-postgre-table" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/opt/vmware/vpostgres/current/bin/pg_dump -U postgres --table<span class="o">=</span>comp_bprequest --data-only --column-inserts vcac &gt; /storage/db/comp_bprequest.sql
+</pre></div>
+</div>
+</div>
+<div class="section" id="dump-the-whole-postgre-db">
+<h1>Dump the whole postgre db<a class="headerlink" href="#dump-the-whole-postgre-db" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://kb.vmware.com/s/article/2074214">https://kb.vmware.com/s/article/2074214</a></p>
+<p>Log in to the VMware vRealize Automation virtual appliance using SSH.
+Run this command to stop the VMware vRealize Automation service.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>service vcac-server stop
+</pre></div>
+</div>
+<p>Go to /tmp</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /tmp
+</pre></div>
+</div>
+<p>Run this command to create a copy of the database in /tmp (Note: Both the database name and user name are vcac.
+It is recommended to use pg_dumpall as it is a complete export file. This includes multiple databases (if present) and user role information.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>su -m -c <span class="s2">&quot;/opt/vmware/vpostgres/current/bin/pg_dumpall -c -f /tmp/vcac.sql&quot;</span> postgres
+</pre></div>
+</div>
+<p>Run this command to compress the database:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bzip2 -z /tmp/vcac.sql
+</pre></div>
+</div>
+<p>Run this command to restart the VMware vRealize Automation service:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>service vcac-server start
+</pre></div>
+</div>
+<p>Use SCP or WinSCP to transfer the vcacvadbdump.bz2 file out of the appliance.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="change_request_status_postgre.html" class="btn btn-neutral float-right" title="Change request status" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="change_owner_postgre.html" class="btn btn-neutral float-left" title="Change owner in the vRa postGre" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Richard DEVERS
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
