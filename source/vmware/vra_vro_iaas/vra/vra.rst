@@ -12,3 +12,4 @@ vRa
    remove_node_from_cluster
    reset_node
    db_lock
+   update_xaas

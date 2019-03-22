@@ -89,11 +89,8 @@
 <li class="toctree-l3 current"><a class="reference internal" href="vro.html">vRo</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Certificate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="heap_size.html">Modify heap size</a></li>
-<li class="toctree-l4"><a class="reference internal" href="auth.html">List trust</a></li>
-<li class="toctree-l4"><a class="reference internal" href="auth.html#reset-auth-to-local">Reset auth to local</a></li>
-<li class="toctree-l4"><a class="reference internal" href="auth.html#restart-authentication-service">Restart authentication service</a></li>
-<li class="toctree-l4"><a class="reference internal" href="password.html">Check expiration status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="password.html#add-999-days-to-expires-date-for-root">Add 999 days to expires date for root</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auth.html">authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="various.html">Various</a></li>
 <li class="toctree-l4"><a class="reference internal" href="postman.html">Postman</a></li>
 </ul>
 </li>
@@ -180,18 +177,24 @@
 <h1>Certificate<a class="headerlink" href="#certificate" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="list-certificate">
 <h2>List certificate<a class="headerlink" href="#list-certificate" title="Permalink to this headline">¶</a></h2>
-<p>keytool -list -keystore /etc/vco/app-server/security/jssecacerts -v -alias vco.sso.ssl.certificate  -storepass $PASS
-keytool -list -keystore /etc/vco/app-server/security/jssecacerts -v -alias vco.cafe.component-registry.ssl.certificate -storepass $PASS</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>keytool -list -keystore /etc/vco/app-server/security/jssecacerts -v -alias vco.sso.ssl.certificate  -storepass <span class="nv">$PASS</span>
+keytool -list -keystore /etc/vco/app-server/security/jssecacerts -v -alias vco.cafe.component-registry.ssl.certificate -storepass <span class="nv">$PASS</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="delete-certificate">
 <h2>Delete certificate<a class="headerlink" href="#delete-certificate" title="Permalink to this headline">¶</a></h2>
-<p>keytool -delete -keystore /etc/vco/app-server/security/jssecacerts -v -alias vco.sso.ssl.certificate  -storepass $PASS
-keytool -delete -keystore /etc/vco/app-server/security/jssecacerts -v -alias vco.cafe.component-registry.ssl.certificate -storepass $PASS</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>keytool -delete -keystore /etc/vco/app-server/security/jssecacerts -v -alias vco.sso.ssl.certificate  -storepass <span class="nv">$PASS</span>
+keytool -delete -keystore /etc/vco/app-server/security/jssecacerts -v -alias vco.cafe.component-registry.ssl.certificate -storepass <span class="nv">$PASS</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="reimport-certificate">
 <h2>Reimport certificate<a class="headerlink" href="#reimport-certificate" title="Permalink to this headline">¶</a></h2>
-<p>/var/lib/vco/tools/configuration-cli/bin/vro-configure.sh trust –registry-certificate –uri <a class="reference external" href="https:/">https:/</a>/&lt;cafe_uri&gt;
-/var/lib/vco/tools/configuration-cli/bin/vro-configure.sh trust –sso-certificate –uri <a class="reference external" href="https:/">https:/</a>/&lt;cafe_uri&gt;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/var/lib/vco/tools/configuration-cli/bin/vro-configure.sh trust --registry-certificate --uri https://&lt;cafe_uri&gt;
+/var/lib/vco/tools/configuration-cli/bin/vro-configure.sh trust --sso-certificate --uri https://&lt;cafe_uri&gt;
+</pre></div>
+</div>
 </div>
 </div>
 
