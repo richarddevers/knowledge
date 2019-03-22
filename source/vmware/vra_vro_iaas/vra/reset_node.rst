@@ -1,5 +1,5 @@
 Force reset vRa node
-====================
+**********************
 
 .. code-block:: bash
 

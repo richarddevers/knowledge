@@ -1,7 +1,7 @@
 .. _change_owner_postgre:
 
 Change owner in the vRa postGre
-=========================================
+********************************
 
 Get the vm id from the cat_resource table
 

@@ -87,13 +87,14 @@
 <li class="toctree-l1 current"><a class="reference internal" href="openstack.html">OpenStack</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="manual_installation.html">Manual installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtu.html">Nova</a></li>
-<li class="toctree-l2"><a class="reference internal" href="network.html">OpenVswitch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="network.html#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html">Network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="provisionning.html">Provisionning overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="monitoring.html">Monitoring</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Troubleshooting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#neutron">Neutron</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#nova">Nova</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#neutron">Neutron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nova">Nova</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -164,9 +165,8 @@
             
   <div class="section" id="troubleshooting">
 <h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
-</div>
 <div class="section" id="neutron">
-<h1>Neutron<a class="headerlink" href="#neutron" title="Permalink to this headline">¶</a></h1>
+<h2>Neutron<a class="headerlink" href="#neutron" title="Permalink to this headline">¶</a></h2>
 <p>P344 of Mastering OpenStack</p>
 <p>List agent of a network node:
 ip netns</p>
@@ -183,7 +183,7 @@ qdhcp-UUID: Represents the DHCP agent namespace for a private network created in
 </dl>
 </div>
 <div class="section" id="nova">
-<h1>Nova<a class="headerlink" href="#nova" title="Permalink to this headline">¶</a></h1>
+<h2>Nova<a class="headerlink" href="#nova" title="Permalink to this headline">¶</a></h2>
 <p>nova list</p>
 <p>nova hypervisor-list</p>
 <p>nova live-migration –block-migrate b51498ca-0a59-42bd-945a-18246668186d cc02.pp (shared storage needed)</p>
@@ -198,6 +198,7 @@ where host=’cc01.pp’;</dd>
 <p>Log d’une instance:</p>
 <p>nova console-log b51498ca-0a59-42bd-945a-18246668186d</p>
 <p>The complete console logs for each instance resides by default in the /var/lib/nova/instances/INSTANCE_UIID/console.log file, where INSTANCE_UIID is the instance UUID under question.</p>
+</div>
 </div>
 
 

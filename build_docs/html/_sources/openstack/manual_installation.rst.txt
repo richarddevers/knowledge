@@ -1,5 +1,5 @@
 Manual installation
-====================
+********************
 
 .. code-block:: bash
 

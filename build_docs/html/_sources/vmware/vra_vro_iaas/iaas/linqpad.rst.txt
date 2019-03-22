@@ -1,3 +1,6 @@
+Linqpad
+*******
+
 Linqpad configuration
 =====================
 

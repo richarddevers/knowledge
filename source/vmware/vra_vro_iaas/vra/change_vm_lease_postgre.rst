@@ -1,7 +1,7 @@
 .. _change_vm_lease_postgre:
 
 Change vm lease in vRa postgre
-==============================
+********************************
 
 Identy the postgre master node using the vami (database table)
 

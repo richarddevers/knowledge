@@ -1,5 +1,5 @@
 Troubleshooting
-===============
+*****************
 
 Log locations for VMware vRealize Automation 7.x (2141175)
     https://kb.vmware.com/s/article/2141175

@@ -1,7 +1,7 @@
 .. _change_vm_lease_iaas:
 
 Change vm lease in iaas db
-==========================
+***************************
 
 Find data about your vm
 

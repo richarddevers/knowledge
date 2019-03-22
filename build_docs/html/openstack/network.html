@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>OpenVswitch &mdash; knowledge 1.0.0 documentation</title>
+  <title>Network &mdash; knowledge 1.0.0 documentation</title>
   
 
   
@@ -34,7 +34,9 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Provisionning overview" href="provisionning.html" />
+    <link rel="prev" title="Nova" href="virtu.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -79,10 +81,23 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../db/db.html">Database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../vmware/vmware.html">Vmware</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../vmware/vmware.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/dev.html">Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="openstack.html">OpenStack</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="manual_installation.html">Manual installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtu.html">Nova</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Network</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#openvswitch">OpenVswitch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#various">Various</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="provisionning.html">Provisionning overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitoring.html">Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshoot.html">Troubleshooting</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -128,7 +143,9 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>OpenVswitch</li>
+          <li><a href="openstack.html">OpenStack</a> &raquo;</li>
+        
+      <li>Network</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -147,8 +164,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="openvswitch">
-<h1>OpenVswitch<a class="headerlink" href="#openvswitch" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="network">
+<h1>Network<a class="headerlink" href="#network" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="openvswitch">
+<h2>OpenVswitch<a class="headerlink" href="#openvswitch" title="Permalink to this headline">¶</a></h2>
 <p>List tags by namespace/project/instance</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ovs-vsctl show
 </pre></div>
@@ -158,8 +177,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="network">
-<h1>Network<a class="headerlink" href="#network" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="various">
+<h2>Various<a class="headerlink" href="#various" title="Permalink to this headline">¶</a></h2>
 <p>Lister les namespace réseaux</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ip netns
 </pre></div>
@@ -174,12 +193,22 @@ eg: ip netns <span class="nb">exec</span> qrouter-90321d2f-2b4f-46af-a8d5-b11f2a
 </pre></div>
 </div>
 </div>
+</div>
 
 
            </div>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="provisionning.html" class="btn btn-neutral float-right" title="Provisionning overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="virtu.html" class="btn btn-neutral float-left" title="Nova" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

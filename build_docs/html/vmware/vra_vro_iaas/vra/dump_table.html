@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Dump postgre table &mdash; knowledge 1.0.0 documentation</title>
+  <title>Db Dump &mdash; knowledge 1.0.0 documentation</title>
   
 
   
@@ -87,14 +87,12 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../vra_vro_iaas.html">vRa - vRo - Iaas</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="vra.html">vRa</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="change_owner_postgre.html">Change owner in the vRa postGre</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Dump postgre table</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dump-the-whole-postgre-db">Dump the whole postgre db</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Db Dump</a></li>
 <li class="toctree-l4"><a class="reference internal" href="change_request_status_postgre.html">Change request status</a></li>
 <li class="toctree-l4"><a class="reference internal" href="change_vm_lease_postgre.html">Change vm lease in vRa postgre</a></li>
 <li class="toctree-l4"><a class="reference internal" href="remove_node_from_cluster.html">Remove vRa node from cluster</a></li>
 <li class="toctree-l4"><a class="reference internal" href="reset_node.html">Force reset vRa node</a></li>
-<li class="toctree-l4"><a class="reference internal" href="db_lock.html">Identiy DB locked</a></li>
-<li class="toctree-l4"><a class="reference internal" href="db_lock.html#delete-db-lock">Delete DB Lock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="db_lock.html">Db lock</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../vro/vro.html">vRo</a></li>
@@ -102,12 +100,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../troubleshoot.html">Troubleshooting</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../vra_vro_iaas.html#indices-and-tables">Indices and tables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../core/core.html">Core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../core/core.html#indices-and-tables">Indices and tables</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../vmware.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev/dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../openstack/openstack.html">OpenStack</a></li>
 </ul>
 
             
@@ -159,7 +156,7 @@
         
           <li><a href="vra.html">vRa</a> &raquo;</li>
         
-      <li>Dump postgre table</li>
+      <li>Db Dump</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -178,14 +175,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="dump-postgre-table">
-<h1>Dump postgre table<a class="headerlink" href="#dump-postgre-table" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="db-dump">
+<h1>Db Dump<a class="headerlink" href="#db-dump" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dump-postgre-table">
+<h2>Dump postgre table<a class="headerlink" href="#dump-postgre-table" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/opt/vmware/vpostgres/current/bin/pg_dump -U postgres --table<span class="o">=</span>comp_bprequest --data-only --column-inserts vcac &gt; /storage/db/comp_bprequest.sql
 </pre></div>
 </div>
 </div>
 <div class="section" id="dump-the-whole-postgre-db">
-<h1>Dump the whole postgre db<a class="headerlink" href="#dump-the-whole-postgre-db" title="Permalink to this headline">¶</a></h1>
+<h2>Dump the whole postgre db<a class="headerlink" href="#dump-the-whole-postgre-db" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://kb.vmware.com/s/article/2074214">https://kb.vmware.com/s/article/2074214</a></p>
 <p>Log in to the VMware vRealize Automation virtual appliance using SSH.
 Run this command to stop the VMware vRealize Automation service.</p>
@@ -210,6 +209,7 @@ It is recommended to use pg_dumpall as it is a complete export file. This includ
 </pre></div>
 </div>
 <p>Use SCP or WinSCP to transfer the vcacvadbdump.bz2 file out of the appliance.</p>
+</div>
 </div>
 
 

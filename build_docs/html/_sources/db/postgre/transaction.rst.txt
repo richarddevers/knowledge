@@ -1,7 +1,7 @@
 .. _postgre_transaction:
 
 Transaction
-===========
+*************
 
 If implemented, switch to the postgre user context
 

@@ -1,5 +1,5 @@
 git
-===
+****
 
 <git init> init a repo
 

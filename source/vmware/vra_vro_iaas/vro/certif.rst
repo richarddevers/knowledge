@@ -1,5 +1,8 @@
+Certificate
+*****************
+
 List certificate
-================
+=================
 
 keytool -list -keystore /etc/vco/app-server/security/jssecacerts -v -alias vco.sso.ssl.certificate  -storepass $PASS
 keytool -list -keystore /etc/vco/app-server/security/jssecacerts -v -alias vco.cafe.component-registry.ssl.certificate -storepass $PASS 

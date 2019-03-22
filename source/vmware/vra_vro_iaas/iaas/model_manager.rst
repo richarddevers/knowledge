@@ -1,5 +1,5 @@
-Check if the failover is activated
-==================================
+Check failover
+***********************************
 
 Through vRa:
 

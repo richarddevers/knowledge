@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>List trust &mdash; knowledge 1.0.0 documentation</title>
+  <title>authentication &mdash; knowledge 1.0.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Check expiration status" href="password.html" />
+    <link rel="next" title="Various" href="various.html" />
     <link rel="prev" title="Modify heap size" href="heap_size.html" /> 
 </head>
 
@@ -87,30 +87,22 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../vra_vro_iaas.html">vRa - vRo - Iaas</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../vra/vra.html">vRa</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="vro.html">vRo</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="certif.html">List certificate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="certif.html#delete-certificate">Delete certificate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="certif.html#reimport-certificate">Reimport certificate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="certif.html">Certificate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="heap_size.html">Modify heap size</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">List trust</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#reset-auth-to-local">Reset auth to local</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#restart-authentication-service">Restart authentication service</a></li>
-<li class="toctree-l4"><a class="reference internal" href="password.html">Check expiration status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="password.html#add-999-days-to-expires-date-for-root">Add 999 days to expires date for root</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="various.html">Various</a></li>
 <li class="toctree-l4"><a class="reference internal" href="postman.html">Postman</a></li>
-<li class="toctree-l4"><a class="reference internal" href="postman.html#vro-api-official-documentation">vRo API official documentation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="postman.html#pre-request-script-to-log-to-vro-api">Pre request script to log to vRo API</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../iaas/iaas.html">Iaas</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../troubleshoot.html">Troubleshooting</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../vra_vro_iaas.html#indices-and-tables">Indices and tables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../core/core.html">Core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../core/core.html#indices-and-tables">Indices and tables</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../vmware.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev/dev.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../openstack/openstack.html">OpenStack</a></li>
 </ul>
 
             
@@ -162,7 +154,7 @@
         
           <li><a href="vro.html">vRo</a> &raquo;</li>
         
-      <li>List trust</li>
+      <li>authentication</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -181,23 +173,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="list-trust">
-<h1>List trust<a class="headerlink" href="#list-trust" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="authentication">
+<h1>authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="list-trust">
+<h2>List trust<a class="headerlink" href="#list-trust" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/var/lib/vco/tools/configuration-cli/bin/vro-configure.sh list-trust
 </pre></div>
 </div>
 </div>
 <div class="section" id="reset-auth-to-local">
-<h1>Reset auth to local<a class="headerlink" href="#reset-auth-to-local" title="Permalink to this headline">¶</a></h1>
+<h2>Reset auth to local<a class="headerlink" href="#reset-auth-to-local" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/var/lib/vco/tools/configuration-cli/bin/vro-configure.sh reset-authentication
 </pre></div>
 </div>
 </div>
 <div class="section" id="restart-authentication-service">
-<h1>Restart authentication service<a class="headerlink" href="#restart-authentication-service" title="Permalink to this headline">¶</a></h1>
+<h2>Restart authentication service<a class="headerlink" href="#restart-authentication-service" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>service vco-server restart
 service vco-configurator restart
 </pre></div>
+</div>
 </div>
 </div>
 
@@ -209,7 +204,7 @@ service vco-configurator restart
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="password.html" class="btn btn-neutral float-right" title="Check expiration status" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="various.html" class="btn btn-neutral float-right" title="Various" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="heap_size.html" class="btn btn-neutral float-left" title="Modify heap size" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
