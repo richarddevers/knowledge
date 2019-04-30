@@ -37,7 +37,7 @@ MariaDB> use nova;
    MariaDB [nova]> update instances set host='cc02.pp'
    where host='cc01.pp';
 
-Once record sets are updated, each instance requires a libvirt's XML file to boot properly, these can be located in/etc/libvirt/qemu/instance-*.xml. To start instances while creating the XML file, user reboot command line by adding the --hard option:
+Once record sets are updated, each instance requires a libvirt's XML file to boot properly, these can be located in/etc/libvirt/qemu/instance-*.xml. To start instances while creating the XML file, user reboot command line by adding the --hard option
 
 nova reboot --hard b51498ca-0a59-42bd-945a-18246668186d
 

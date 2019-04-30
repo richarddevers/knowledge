@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>vRa &mdash; knowledge 1.0.0 documentation</title>
+  <title>Postman &mdash; knowledge 1.0.0 documentation</title>
   
 
   
@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Change owner in the vRa postGre" href="change_owner_postgre.html" />
-    <link rel="prev" title="vRa - vRo - Iaas" href="../vra_vro_iaas.html" /> 
+    <link rel="next" title="vRo" href="../vro/vro.html" />
+    <link rel="prev" title="Update xaas through vRa api" href="update_xaas.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,7 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../db/db.html">Database</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../vmware.html">Vmware</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../vra_vro_iaas.html">vRa - vRo - Iaas</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">vRa</a><ul>
+<li class="toctree-l3 current"><a class="reference internal" href="vra.html">vRa</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="change_owner_postgre.html">Change owner in the vRa postGre</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dump_table.html">Db Dump</a></li>
 <li class="toctree-l4"><a class="reference internal" href="change_request_status_postgre.html">Change request status</a></li>
@@ -94,7 +94,7 @@
 <li class="toctree-l4"><a class="reference internal" href="reset_node.html">Force reset vRa node</a></li>
 <li class="toctree-l4"><a class="reference internal" href="db_lock.html">Db lock</a></li>
 <li class="toctree-l4"><a class="reference internal" href="update_xaas.html">Update xaas through vRa api</a></li>
-<li class="toctree-l4"><a class="reference internal" href="postman.html">Postman</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Postman</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../vro/vro.html">vRo</a></li>
@@ -156,13 +156,15 @@
         
           <li><a href="../vra_vro_iaas.html">vRa - vRo - Iaas</a> &raquo;</li>
         
-      <li>vRa</li>
+          <li><a href="vra.html">vRa</a> &raquo;</li>
+        
+      <li>Postman</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../_sources/vmware/vra_vro_iaas/vra/vra.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/vmware/vra_vro_iaas/vra/postman.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -175,44 +177,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="vra">
-<h1>vRa<a class="headerlink" href="#vra" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="change_owner_postgre.html">Change owner in the vRa postGre</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dump_table.html">Db Dump</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="dump_table.html#dump-postgre-table">Dump postgre table</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dump_table.html#dump-the-whole-postgre-db">Dump the whole postgre db</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="change_request_status_postgre.html">Change request status</a></li>
-<li class="toctree-l1"><a class="reference internal" href="change_vm_lease_postgre.html">Change vm lease in vRa postgre</a></li>
-<li class="toctree-l1"><a class="reference internal" href="remove_node_from_cluster.html">Remove vRa node from cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reset_node.html">Force reset vRa node</a></li>
-<li class="toctree-l1"><a class="reference internal" href="db_lock.html">Db lock</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="db_lock.html#identiy-db-locked">Identiy DB locked</a></li>
-<li class="toctree-l2"><a class="reference internal" href="db_lock.html#delete-db-lock">Delete DB Lock</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="update_xaas.html">Update xaas through vRa api</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="update_xaas.html#get-the-id-of-the-xaas-blueprint">Get the id of the xaas-blueprint</a></li>
-<li class="toctree-l2"><a class="reference internal" href="update_xaas.html#get-the-id-of-the-blueprint">Get the id of the blueprint</a></li>
-<li class="toctree-l2"><a class="reference internal" href="update_xaas.html#get-the-blueprint-data">Get the blueprint data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="update_xaas.html#update-the-blueprint">Update the blueprint</a></li>
-<li class="toctree-l2"><a class="reference internal" href="update_xaas.html#create-a-package">Create a package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="update_xaas.html#download-the-package">Download the package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="update_xaas.html#update-package">Update package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="update_xaas.html#upload-package">Upload package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="update_xaas.html#optional-list-package">(Optional) List package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="update_xaas.html#optional-delete-a-package">(Optional) Delete a package</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="postman.html">Postman</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="postman.html#pre-request-auth-script">Pre-request auth script</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="postman">
+<h1>Postman<a class="headerlink" href="#postman" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="pre-request-auth-script">
+<h2>Pre-request auth script<a class="headerlink" href="#pre-request-auth-script" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">pm</span><span class="p">.</span><span class="nx">sendRequest</span><span class="p">({</span>
+    <span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;https://&quot;</span> <span class="o">+</span> <span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;vra-fqdn&quot;</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;/identity/api/tokens&quot;</span><span class="p">,</span>
+    <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+    <span class="nx">header</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Accept&#39;</span><span class="o">:</span><span class="s1">&#39;application/json&#39;</span>
+    <span class="p">},</span>
+    <span class="nx">body</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;raw&#39;</span><span class="p">,</span>
+        <span class="nx">raw</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="nx">username</span><span class="o">:</span> <span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">),</span> <span class="nx">password</span><span class="o">:</span> <span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">),</span><span class="nx">tenant</span><span class="o">:</span> <span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;tenant&quot;</span><span class="p">)})</span>
+    <span class="p">}</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;vra_token&quot;</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">().</span><span class="nx">id</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -224,10 +208,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="change_owner_postgre.html" class="btn btn-neutral float-right" title="Change owner in the vRa postGre" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../vro/vro.html" class="btn btn-neutral float-right" title="vRo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../vra_vro_iaas.html" class="btn btn-neutral float-left" title="vRa - vRo - Iaas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="update_xaas.html" class="btn btn-neutral float-left" title="Update xaas through vRa api" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

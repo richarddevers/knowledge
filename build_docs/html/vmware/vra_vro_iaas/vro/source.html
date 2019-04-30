@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>vRo &mdash; knowledge 1.0.0 documentation</title>
+  <title>Get source request (api or portal?) &mdash; knowledge 1.0.0 documentation</title>
   
 
   
@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Certificate" href="certif.html" />
-    <link rel="prev" title="Postman" href="../vra/postman.html" /> 
+    <link rel="next" title="Iaas" href="../iaas/iaas.html" />
+    <link rel="prev" title="Postman" href="postman.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,13 +86,13 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../vmware.html">Vmware</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../vra_vro_iaas.html">vRa - vRo - Iaas</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../vra/vra.html">vRa</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">vRo</a><ul>
+<li class="toctree-l3 current"><a class="reference internal" href="vro.html">vRo</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="certif.html">Certificate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="heap_size.html">Modify heap size</a></li>
 <li class="toctree-l4"><a class="reference internal" href="auth.html">authentication</a></li>
 <li class="toctree-l4"><a class="reference internal" href="various.html">Various</a></li>
 <li class="toctree-l4"><a class="reference internal" href="postman.html">Postman</a></li>
-<li class="toctree-l4"><a class="reference internal" href="source.html">Get source request (api or portal?)</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Get source request (api or portal?)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../iaas/iaas.html">Iaas</a></li>
@@ -153,13 +153,15 @@
         
           <li><a href="../vra_vro_iaas.html">vRa - vRo - Iaas</a> &raquo;</li>
         
-      <li>vRo</li>
+          <li><a href="vro.html">vRo</a> &raquo;</li>
+        
+      <li>Get source request (api or portal?)</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../_sources/vmware/vra_vro_iaas/vro/vro.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/vmware/vra_vro_iaas/vro/source.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -172,37 +174,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="vro">
-<h1>vRo<a class="headerlink" href="#vro" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="certif.html">Certificate</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="certif.html#list-certificate">List certificate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="certif.html#delete-certificate">Delete certificate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="certif.html#reimport-certificate">Reimport certificate</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="heap_size.html">Modify heap size</a></li>
-<li class="toctree-l1"><a class="reference internal" href="auth.html">authentication</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="auth.html#list-trust">List trust</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auth.html#reset-auth-to-local">Reset auth to local</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auth.html#restart-authentication-service">Restart authentication service</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="various.html">Various</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="various.html#check-expiration-status">Check expiration status</a></li>
-<li class="toctree-l2"><a class="reference internal" href="various.html#add-999-days-to-expires-date-for-root">Add 999 days to expires date for root</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="postman.html">Postman</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="postman.html#vro-api-official-documentation">vRo API official documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="postman.html#pre-request-script-to-log-to-vro-api">Pre request script to log to vRo API</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source.html">Get source request (api or portal?)</a></li>
-</ul>
-</div>
+  <div class="section" id="get-source-request-api-or-portal">
+<h1>Get source request (api or portal?)<a class="headerlink" href="#get-source-request-api-or-portal" title="Permalink to this headline">¶</a></h1>
+<p>This trick will set a form_gui boolean which will be set to true if the request come from the vRa portal and false if it have been directly issued through api.</p>
+<img alt="../../../_images/source.png" src="../../../_images/source.png" />
 </div>
 
 
@@ -213,10 +188,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="certif.html" class="btn btn-neutral float-right" title="Certificate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../iaas/iaas.html" class="btn btn-neutral float-right" title="Iaas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../vra/postman.html" class="btn btn-neutral float-left" title="Postman" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="postman.html" class="btn btn-neutral float-left" title="Postman" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

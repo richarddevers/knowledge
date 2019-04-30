@@ -13,3 +13,4 @@ vRa
    reset_node
    db_lock
    update_xaas
+   postman

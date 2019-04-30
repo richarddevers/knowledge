@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Troubleshooting &mdash; knowledge 1.0.0 documentation</title>
+  <title>os &mdash; knowledge 1.0.0 documentation</title>
   
 
   
@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="os" href="../os/os.html" />
-    <link rel="prev" title="Monitoring" href="monitoring.html" /> 
+    <link rel="next" title="ssh" href="linux.html" />
+    <link rel="prev" title="Troubleshooting" href="../openstack/troubleshoot.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,20 +85,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../db/db.html">Database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../vmware/vmware.html">Vmware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/dev.html">Development</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="openstack.html">OpenStack</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="manual_installation.html">Manual installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="virtu.html">Nova</a></li>
-<li class="toctree-l2"><a class="reference internal" href="network.html">Network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="provisionning.html">Provisionning overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="monitoring.html">Monitoring</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#neutron">Neutron</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#nova">Nova</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../openstack/openstack.html">OpenStack</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">os</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linux.html">ssh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mac.html">Macos</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../os/os.html">os</a></li>
 </ul>
 
             
@@ -144,15 +136,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="openstack.html">OpenStack</a> &raquo;</li>
-        
-      <li>Troubleshooting</li>
+      <li>os</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/openstack/troubleshoot.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/os/os.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -165,41 +155,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="troubleshooting">
-<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="neutron">
-<h2>Neutron<a class="headerlink" href="#neutron" title="Permalink to this headline">¶</a></h2>
-<p>P344 of Mastering OpenStack</p>
-<p>List agent of a network node:
-ip netns</p>
-<p>qrouter-UUID: Represents the L3 agent router namespace and instance connected to the router UUID created in the network node
-qdhcp-UUID: Represents the DHCP agent namespace for a private network created in the network node</p>
-<dl class="docutils">
-<dt>Delving deeper in to this network picture would bring more details in each namespace and show different IP addresses attached to active interfaces:</dt>
-<dd># ip netns exec qrouter-a029775e-204b-45b6-ad86-
-0ed2507d5bf ip a</dd>
-<dt>Attached routes to the same router namespace can be checked as follows:</dt>
-<dd># ip netns exec qrouter-a029775e-204b-45b6-ad86-0ed2507d5bf ip r</dd>
-<dt>Dedicated IPtables per each namespace are available by running the following:</dt>
-<dd># ip netns exec qrouter-a029775e-204b-45b6-ad86-0ed2507d5bf iptables -n</dd>
-</dl>
-</div>
-<div class="section" id="nova">
-<h2>Nova<a class="headerlink" href="#nova" title="Permalink to this headline">¶</a></h2>
-<p>nova list</p>
-<p>nova hypervisor-list</p>
-<p>nova live-migration –block-migrate b51498ca-0a59-42bd-945a-18246668186d cc02.pp (shared storage needed)</p>
-<p>If compute down, reboot vm on another hypervisor (p343 of Mastering OpenStack):</p>
-<dl class="docutils">
-<dt>MariaDB&gt; use nova;</dt>
-<dd>MariaDB [nova]&gt; update instances set host=’cc02.pp’
-where host=’cc01.pp’;</dd>
-</dl>
-<p>Once record sets are updated, each instance requires a libvirt’s XML file to boot properly, these can be located in/etc/libvirt/qemu/instance-<a href="#id1"><span class="problematic" id="id2">*</span></a>.xml. To start instances while creating the XML file, user reboot command line by adding the –hard option</p>
-<p>nova reboot –hard b51498ca-0a59-42bd-945a-18246668186d</p>
-<p>Log d’une instance:</p>
-<p>nova console-log b51498ca-0a59-42bd-945a-18246668186d</p>
-<p>The complete console logs for each instance resides by default in the /var/lib/nova/instances/INSTANCE_UIID/console.log file, where INSTANCE_UIID is the instance UUID under question.</p>
+  <div class="section" id="os">
+<h1>os<a class="headerlink" href="#os" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux.html">ssh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linux.html#generate-ssh-key">Generate ssh key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linux.html#copy-generated-key-on-the-remote-server">Copy generated key on the remote server</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mac.html">Macos</a></li>
+</ul>
 </div>
 </div>
 
@@ -211,10 +178,10 @@ where host=’cc01.pp’;</dd>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../os/os.html" class="btn btn-neutral float-right" title="os" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="linux.html" class="btn btn-neutral float-right" title="ssh" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="monitoring.html" class="btn btn-neutral float-left" title="Monitoring" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../openstack/troubleshoot.html" class="btn btn-neutral float-left" title="Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

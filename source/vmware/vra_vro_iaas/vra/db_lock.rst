@@ -1,7 +1,7 @@
 Db lock
 *********
 
-Identiy DB locked
+Identify DB locked
 =================
 
 .. code-block:: psql

@@ -9,6 +9,7 @@ knowledge
    vmware/vmware
    dev/dev
    openstack/openstack
+   os/os
 
 Indices and tables
 ==================
