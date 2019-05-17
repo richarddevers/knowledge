@@ -2,7 +2,7 @@ Postman
 ********
 
 Pre-request auth script
-=======================
+------------------------
 
 .. code-block:: js
 

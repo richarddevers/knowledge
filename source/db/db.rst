@@ -5,4 +5,4 @@ Database
    :maxdepth: 2
    :caption: Contents:
 
-   postgre/postgre
+   postgre

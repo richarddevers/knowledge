@@ -44,6 +44,6 @@ Externals refs :
 
 https://kb.vmware.com/s/article/2014714  (turn the option on again without restarting vCenter)
 https://kb.vmware.com/s/article/2147285 (connecting to vpostgres)
-https://kb.vmware.com/s/article/2008957 (getting in the DB if there’s a lock : steps #3 & #5), also provide a solution but needs vcenter restart ☹ )
+https://kb.vmware.com/s/article/2008957 (getting in the DB if there’s a lock : steps #3 & #5), also provide a solution but require vcenter restart ☹ )
 
 

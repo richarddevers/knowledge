@@ -2,14 +2,14 @@ Db Dump
 *********
 
 Dump postgre table
-==================
+--------------------
 
 .. code-block:: bash 
 
     /opt/vmware/vpostgres/current/bin/pg_dump -U postgres --table=comp_bprequest --data-only --column-inserts vcac > /storage/db/comp_bprequest.sql
 
 Dump the whole postgre db
-=========================
+---------------------------
 
 https://kb.vmware.com/s/article/2074214
 

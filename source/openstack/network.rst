@@ -2,7 +2,7 @@ Network
 *********
 
 OpenVswitch
-===========
+-------------
 
 List tags by namespace/project/instance
 
@@ -17,7 +17,7 @@ Dump flow of a specific bridge:
     ovs-vfctl dump-flow $(BRIDGE_NAME)
 
 Various
-=======
+--------
 
 Lister les namespace réseaux
 

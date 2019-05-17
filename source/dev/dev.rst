@@ -6,3 +6,4 @@ Development
    :caption: Contents:
 
    git
+   python/python

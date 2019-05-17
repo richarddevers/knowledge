@@ -2,7 +2,7 @@ Troubleshooting
 ****************
 
 Neutron
-=======
+--------
 
 P344 of Mastering OpenStack
 
@@ -23,7 +23,7 @@ Dedicated IPtables per each namespace are available by running the following:
    # ip netns exec qrouter-a029775e-204b-45b6-ad86-0ed2507d5bf iptables -n
 
 Nova
-=====
+------
 
 nova list
 
@@ -37,7 +37,7 @@ MariaDB> use nova;
    MariaDB [nova]> update instances set host='cc02.pp'
    where host='cc01.pp';
 
-Once record sets are updated, each instance requires a libvirt's XML file to boot properly, these can be located in/etc/libvirt/qemu/instance-*.xml. To start instances while creating the XML file, user reboot command line by adding the --hard option
+Once record sets are updated, each instance requires a libvirt's XML file to boot properly, these can be located in/etc/libvirt/qemu/instance-*.xml. To start instances while creating the XML file, user reboot command line by adding the --hard option.
 
 nova reboot --hard b51498ca-0a59-42bd-945a-18246668186d
 

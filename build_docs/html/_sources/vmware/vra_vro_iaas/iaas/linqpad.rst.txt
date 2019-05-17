@@ -2,7 +2,7 @@ Linqpad
 *******
 
 Linqpad configuration
-=====================
+-----------------------
 
 Type: WCF Data Services 5.5(OData3)
 https://iaas_server_fqdn/repository/data/ManagementModelEntities.svc/
@@ -11,7 +11,7 @@ Accept Invalid certificates true
 
 
 Request example
-===============
+----------------
 
 ProvisioningGroups.Where(x => x.GroupName == "<<owner>>")
 
@@ -26,7 +26,7 @@ HostReservations.Expand("Host").Where(x=>x.HostReservationName == "<<reservation
 HostNicToReservations.Where(x => x.HostReservationID == new Guid ("<<guid>>") )
 
 Links
-=====
+-------
 
 https://www.simplygeek.co.uk/2019/01/14/performing-create-read-update-and-delete-operations-on-vra-iaas-entity-objects/
 

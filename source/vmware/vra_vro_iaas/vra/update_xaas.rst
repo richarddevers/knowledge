@@ -10,7 +10,7 @@ The overall process is:
 
 
 Get the id of the xaas-blueprint
-=================================
+----------------------------------
 Perform a GET request on the following url:
 
 .. code-block:: rest
@@ -27,7 +27,7 @@ Curl code:
       -H 'Content-Type: application/json'
 
 Get the id of the blueprint
-=============================
+----------------------------
 
 Perform a GET request on the following url:
 
@@ -46,7 +46,7 @@ Curl code:
 
 
 Get the blueprint data
-=============================
+-----------------------
 
 Perform a GET request on the following url:
 
@@ -65,7 +65,7 @@ Curl code:
 
 
 Update the blueprint
-=============================
+----------------------
 
 After getting the YAML data of the blueprint, you can send it with your modifications on the following URL:
 
@@ -85,7 +85,7 @@ Curl code:
 
 
 Create a package
-=============================
+-----------------
 Perform a POST request on the following url:
 
 .. code-block:: rest
@@ -155,7 +155,7 @@ Curl code:
 
   
 Update package
-=============================
+----------------
 
 The **metadata.yaml** must not be modified.
 The code of your xaas-blueprint is in the subfolder **xaas-blueprint**.
@@ -163,7 +163,7 @@ Modify these yaml according to your needs.
 Once done, zip your package.
 
 Upload package
-=============================
+-----------------
 Perform a POST request on the following url:
 
 .. code-block:: rest
@@ -192,7 +192,7 @@ Curl code:
 
   
 (Optional) List package
-=============================
+------------------------
 Perform a GET request on the following url:
 
 .. code-block:: rest
@@ -200,7 +200,7 @@ Perform a GET request on the following url:
     https://{{vra-fqdn}}/content-management-service/api/packages/
 
 (Optional) Delete a package
-================================
+-----------------------------
 Perform a DEL request on the following url where {{id}} is the package's id:
 
 .. code-block:: rest

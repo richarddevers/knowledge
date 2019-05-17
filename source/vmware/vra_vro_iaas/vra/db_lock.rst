@@ -2,14 +2,14 @@ Db lock
 *********
 
 Identify DB locked
-=================
+--------------------
 
 .. code-block:: psql
 
     select * from saas.databasechangeloglock;
 
 Delete DB Lock
-==============
+--------------------
 
 .. code-block:: psql
 
